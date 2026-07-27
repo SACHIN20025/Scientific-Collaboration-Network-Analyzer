@@ -32,32 +32,14 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=settings.CORS_ORIGINS,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["https://scientific-collaboration-network-analyzer-git-main-champion7.vercel.app"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://scientific-collaboration-network-analyzer-git-main-champion7.vercel.app",
-        "http://localhost:3000",
-        "http://localhost:5173",
-    ],
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 app.include_router(auth.router)
 app.include_router(researchers.router)
@@ -83,3 +65,8 @@ async def root():
 @app.get("/api/health")
 async def health_check():
     return {"status": "ok"}
+
+@app.get("/api/debug-cors")
+async def debug_cors():
+    """TEMPORARY — remove after debugging."""
+    return {"cors_origins": settings.CORS_ORIGINS}
