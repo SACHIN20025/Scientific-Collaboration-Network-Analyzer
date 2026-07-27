@@ -39,12 +39,20 @@ app = FastAPI(
 #     allow_methods=["*"],
 #     allow_headers=["*"],
 # )
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["https://scientific-collaboration-network-analyzer-git-main-champion7.vercel.app"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://scientific-collaboration-network-an.vercel.app",
-        "http://localhost:5173",
+        "https://scientific-collaboration-network-analyzer-git-main-champion7.vercel.app",
         "http://localhost:3000",
+        "http://localhost:5173",
     ],
     allow_credentials=True,
     allow_methods=["*"],
